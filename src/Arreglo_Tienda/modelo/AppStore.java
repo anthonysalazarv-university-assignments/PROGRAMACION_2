@@ -12,11 +12,66 @@ public class AppStore {
     public Juego[] getJuegos() {
         return juegos;
     }
+    public int getIndice() {
+        return indice;
+    }
     //El set no se utiliza ya que los datos se ingrasn a demandsa sengun se necesite
-    public void agregarJuego(Juego j ) {
-        if (j != null && indice <=Max) {
+    public boolean agregarJuego(Juego j ) {
+        if (j != null && indice < Max-1) {
             juegos[++indice] = j;
-            return;
+            return true;
         }
+        return false;
+    }
+    public Juego buscarJuego(String nombre) {
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            for (int i = 0; i <= indice; i++) {
+                if(juegos[i].getNombre().equalsIgnoreCase(nombre)) {
+                    return juegos[i];
+                }
+            }
+
+        }
+        return null;
+    }
+    public boolean comprar(String nombre, int cantidad) {
+        if (nombre != null && !nombre.trim().isEmpty() && cantidad >0) {
+            Juego j = buscarJuego(nombre);
+            if (j != null) {
+                return j.comprar(cantidad);
+            }
+        }
+        return false;
+    }
+    public double vender(String nombre, int cantidad) {
+        Juego j=buscarJuego(nombre);
+        if (j != null) {
+            if (j.vender(cantidad)) {
+                return j.getPrecio() * cantidad;
+            }
+        }
+        return 0;
+    }
+    public void cargarDatos() {
+        agregarJuego(new Juego("Minecraft", "Aventura", 1024, 29.99, 50));
+        agregarJuego(new Juego("FIFA 25", "Deportes", 4096, 59.99, 30));
+        agregarJuego(new Juego("Call of Duty", "Shooter", 8192, 69.99, 20));
+        agregarJuego(new Juego("Among Us", "Estrategia", 512, 4.99, 100));
+    }
+
+    public String masVendido(){
+        String nombre = "";
+        int mayor;
+        if(indice >= 0){
+            nombre = juegos[0].getNombre();
+            mayor = juegos[0].getLicenciasVendidas();
+            for(int i = 1; i <= indice; i++){
+                if(juegos[i].getLicenciasVendidas() > mayor){
+                    nombre = juegos[i].getNombre();
+                    mayor = juegos[i].getLicenciasVendidas();
+                }
+            }
+        }
+        return nombre;
     }
 }

@@ -65,16 +65,17 @@ public class Juego {
         }
     }
     public boolean comprar(int cantidad){
-        if (cantidad>0){
-            licenciasDisponibles += cantidad;
+        if (cantidad>0 && cantidad<=licenciasDisponibles){
+            licenciasDisponibles -= cantidad;
+            licenciasVendidas += cantidad;
             return true;
         }
         return false;
     }
     public boolean vender(int cantidad){
-        if (cantidad>0 && cantidad<=licenciasVendidas){
-            licenciasVendidas -= cantidad;
-            licenciasDisponibles+=cantidad;
+        if (cantidad>0 && cantidad<=licenciasDisponibles){
+            licenciasDisponibles -= cantidad;
+            licenciasVendidas+=cantidad;
             return true;
         }
         return false;
