@@ -12,7 +12,6 @@ public class MainTienda {
 
     public static void main(String[] args) {
         int opc;
-        tienda.cargarDatos();
 
         do {
             menu();
@@ -21,7 +20,6 @@ public class MainTienda {
             switch (opc) {
                 case 1:
                     ingresarJuego();
-                    mostrarInformacion();
                     break;
                 case 2:
                     mostrarJuegos();
@@ -96,7 +94,13 @@ public class MainTienda {
 
     public static void mostrarJuegos() {
         System.out.println("******* Lista de juegos *******");
-        mostrarInformacion();
+        if (tienda.getIndice() >= 0) {
+            for (int i = 0; i <= tienda.getIndice(); i++) {
+                System.out.println("  " + (i + 1) + ". " + tienda.getJuegos()[i]);
+            }
+        } else {
+            System.out.println("No hay juegos que mostrar");
+        }
     }
 
     public static void buscarJuego() {
@@ -106,7 +110,7 @@ public class MainTienda {
         Juego j = tienda.buscarJuego(nombre);
 
         if (j != null) {
-            System.out.println(j);
+            System.out.println("  " + j);
         } else {
             System.out.println("Juego no encontrado");
         }

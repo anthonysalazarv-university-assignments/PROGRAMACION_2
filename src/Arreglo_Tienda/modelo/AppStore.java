@@ -76,7 +76,7 @@ public class AppStore {
 
     public String masVendido() {
         String nombre = "";
-        int mayor;
+        int mayor = 0;
         if (indice >= 0) {
             nombre = juegos[0].getNombre();
             mayor = juegos[0].getLicenciasVendidas();
