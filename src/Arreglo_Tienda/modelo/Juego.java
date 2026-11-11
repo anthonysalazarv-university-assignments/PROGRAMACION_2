@@ -17,33 +17,14 @@ public class Juego {
         licenciasVendidas = 0;
     }
 
-    // --- Getters ---
-
     public String getNombre() {
         return nombre;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public int getTamanio() {
-        return tamanio;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public int getLicenciasDisponibles() {
-        return licenciasDisponibles;
     }
 
     public int getLicenciasVendidas() {
         return licenciasVendidas;
     }
 
-    // --- Setters ---
 
     public void setNombre(String nombre) {
         if (nombre != null && !nombre.trim().isEmpty()) {
@@ -68,36 +49,18 @@ public class Juego {
             this.precio = precio;
         }
     }
-
-    // --- Métodos de negocio ---
-
     public boolean comprar(int cantidad) {
-        if (cantidad > 0 && cantidad <= licenciasDisponibles) {
-            licenciasDisponibles -= cantidad;
-            licenciasVendidas += cantidad;
             return true;
         }
         return false;
     }
-
     public boolean vender(int cantidad) {
-        if (cantidad > 0 && cantidad <= licenciasDisponibles) {
-            licenciasDisponibles -= cantidad;
-            licenciasVendidas += cantidad;
             return true;
         }
         return false;
     }
-
-    // --- Representación ---
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-                " | Categoria: " + categoria +
-                " | Tamanio: " + tamanio + " MB" +
-                " | Precio: $" + precio +
-                " | Licencias disponibles: " + licenciasDisponibles +
-                " | Licencias vendidas: " + licenciasVendidas;
     }
 }
