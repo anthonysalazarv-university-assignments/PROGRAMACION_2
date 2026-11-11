@@ -26,6 +26,22 @@ public class Juego {
     }
 
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public int getTamanio() {
+        return tamanio;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public int getLicenciasDisponibles() {
+        return licenciasDisponibles;
+    }
+
     public void setNombre(String nombre) {
         if (nombre != null && !nombre.trim().isEmpty()) {
             this.nombre = nombre;
@@ -50,11 +66,18 @@ public class Juego {
         }
     }
     public boolean comprar(int cantidad) {
+        if (cantidad > 0 && cantidad <= licenciasDisponibles) {
+            licenciasDisponibles -= cantidad;
+            licenciasVendidas += cantidad;
             return true;
         }
         return false;
     }
+
     public boolean vender(int cantidad) {
+        if (cantidad > 0 && cantidad <= licenciasVendidas) {
+            licenciasVendidas -= cantidad;
+            licenciasDisponibles += cantidad;
             return true;
         }
         return false;
@@ -62,5 +85,6 @@ public class Juego {
 
     @Override
     public String toString() {
+        return nombre + " | " + categoria + " | " + tamanio + " MB | $" + precio + " | Disponibles: " + licenciasDisponibles + " | Vendidas: " + licenciasVendidas;
     }
 }
